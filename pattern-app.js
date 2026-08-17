@@ -23,11 +23,133 @@ patterns.splice(4, 0, {
     B -. "graphlets may overlap / compose" .-> A`
 });
 
+// Section 5 makes the agentic RAD loop an explicit development contract rather
+// than an informal workflow. These patterns govern how Plasma itself evolves.
+patterns.push(
+  {
+    n: '5.1',
+    f: 'Development / RAD',
+    t: 'Capability Contract',
+    p: 'Agentic development becomes vague when a task is described as a component, feature idea or architecture objective rather than an observable capability.',
+    r: 'Every RAD cycle begins with a small capability contract that states user value, inputs, outputs, invariants, acceptance evidence, dependencies and forbidden scope.',
+    d: `flowchart TD
+      G["Product goal"] --> C["Capability contract"]
+      C --> V["User value / question"]
+      C --> I["Inputs + preconditions"]
+      C --> O["Observable outputs"]
+      C --> N["Invariants / must-not-break"]
+      C --> T["Acceptance tests + test worlds"]
+      C --> D["Dependencies"]
+      C --> F["Forbidden scope"]
+      V --> R["Ready to build?"]
+      I --> R
+      O --> R
+      N --> R
+      T --> R
+      D --> R
+      F --> R`
+  },
+  {
+    n: '5.2',
+    f: 'Development / RAD',
+    t: 'Smallest Vertical Slice',
+    p: 'Building horizontal subsystems first produces elegant infrastructure without proving that Plasma can perform a useful end-to-end task.',
+    r: 'Build the smallest visible capability that crosses every layer required to answer one real question; generalise only after the slice works repeatedly.',
+    d: `flowchart TD
+      Q["Real user question"] --> S["Smallest useful slice"]
+      S --> W["World state"]
+      W --> O["Typed operation"]
+      O --> E["Geometry / analysis / solver"]
+      E --> V["Validation"]
+      V --> U["Visible result / decision"]
+      U --> A{ "Useful end-to-end?" }
+      A -->|no| X["Delete / simplify / repair"]
+      X --> S
+      A -->|yes| G["Only now generalise repeated structure"]`
+  },
+  {
+    n: '5.3',
+    f: 'Development / RAD',
+    t: 'Deterministic Verification Gate',
+    p: 'A builder agent can convince itself that code is correct, especially when it also controls the tests or acceptance narrative.',
+    r: 'The verifier is independent of the builder and deterministic evidence outranks model judgment. Tests are evidence, not something the builder may weaken to obtain a pass.',
+    d: `flowchart TD
+      B["Builder output"] --> C["Compile / typecheck"]
+      C --> T["Deterministic tests"]
+      T --> G["Geometry validity / known worlds"]
+      G --> N["Numerical + constraint checks"]
+      N --> R["Regression / visual evidence where relevant"]
+      R --> V{ "Verifier pass?" }
+      V -->|yes| A["Accept candidate"]
+      V -->|no| F["Return failure evidence"]
+      F --> B
+      H["Rule: builder cannot weaken acceptance"] -.-> T`
+  },
+  {
+    n: '5.4',
+    f: 'Development / RAD',
+    t: 'Bounded Repair Loop',
+    p: 'Autonomous coding loops can burn time, accumulate speculative changes and repeatedly patch symptoms when the capability or architecture is wrong.',
+    r: 'Repair attempts are explicitly bounded. After the limit, revert or escalate with evidence rather than continuing an open-ended agent loop.',
+    d: `flowchart TD
+      F["Verification failure"] --> D["Diagnose smallest cause"]
+      D --> R["Repair attempt"]
+      R --> V{ "Verified now?" }
+      V -->|yes| C["Commit capability"]
+      V -->|no| N["Increment attempt count"]
+      N --> L{ "Repair limit reached?" }
+      L -->|no| D
+      L -->|yes| S{ "Safe local fallback?" }
+      S -->|yes| X["Revert / reduce scope"]
+      S -->|no| H["Escalate to human with evidence"]`
+  },
+  {
+    n: '5.5',
+    f: 'Development / RAD',
+    t: 'Capability Ledger + Frontier',
+    p: 'Without explicit memory of what has actually been verified, agents rediscover work, overestimate progress and choose speculative infrastructure instead of the next useful gap.',
+    r: 'Maintain a capability ledger as the development state. Select the next task from the smallest valuable gap immediately beyond the verified frontier.',
+    d: `flowchart TD
+      L["Capability ledger"] --> V["VERIFIED capabilities"]
+      L --> P["PROPOSED / BLOCKED capabilities"]
+      V --> F["Verified frontier"]
+      P --> G["Candidate gaps"]
+      F --> S["Selector"]
+      G --> S
+      S --> Q{ "Smallest valuable reachable gap?" }
+      Q --> C["Next capability contract"]
+      C --> B["Build + verify"]
+      B --> A{ "Pass?" }
+      A -->|yes| U["Update ledger + frontier"]
+      U --> L
+      A -->|no| P`
+  },
+  {
+    n: '5.6',
+    f: 'Development / RAD',
+    t: 'Architecture Escalation Gate',
+    p: 'Fast agents are good at local implementation but can accidentally turn a small capability into a permanent architectural commitment.',
+    r: 'Local implementations may change autonomously; changes to north-star invariants, canonical storage, geometry authority, public contracts, security boundaries or major dependencies require explicit architectural approval.',
+    d: `flowchart TD
+      C["Proposed development change"] --> Q{ "Local + reversible?" }
+      Q -->|yes| B["Build in isolated worktree"]
+      Q -->|no| A{ "Touches architectural boundary?" }
+      A -->|no| B
+      A -->|yes| H["Human architecture gate"]
+      H --> E["Evidence: need · alternatives · cost · migration · rollback"]
+      E --> D{ "Approve?" }
+      D -->|yes| B
+      D -->|no| S["Keep current architecture / reduce scope"]
+      B --> V["Verify before merge"]`
+  }
+);
+
 const families = [
   ['World', 1, 'How Plasma owns identity, truth, evidence and representations.'],
   ['Change', 2, 'How the world changes safely, incrementally and through stable contracts.'],
   ['Scale', 3, 'How Plasma stays interactive while worlds, analyses and design populations grow.'],
-  ['Intelligence', 4, 'How Plasma decides what to refine, explore, build and escalate.']
+  ['Intelligence', 4, 'How Plasma decides what to refine, explore, build and escalate.'],
+  ['Development / RAD', 5, 'How Plasma itself evolves through fast, agentic and verifiable capability loops without speculative infrastructure.']
 ];
 
 const root = document.documentElement;
@@ -159,7 +281,7 @@ for (const [family, section, description] of families) {
     `</div>`
   );
   content.insertAdjacentHTML('beforeend',
-    `<section class="section" id="${family.toLowerCase()}">
+    `<section class="section" id="${family.toLowerCase().replace(/[^a-z0-9]+/g, '-')}">
       <div class="section-kicker">Section ${section}</div>
       <h2>${family} Patterns</h2><p>${description}</p>
     </section>` +
