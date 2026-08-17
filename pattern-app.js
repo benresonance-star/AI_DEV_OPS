@@ -18,8 +18,114 @@ const modalDiagram = document.getElementById('modalDiagram');
 const modalTitle = document.getElementById('modalTitle');
 let renderGeneration = 0;
 
-const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc = s => s.replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
 const sid = n => 'p' + n.replace('.', '');
+
+function enhanceAboutNavigator() {
+  const nav = document.querySelector('.about-nav');
+  if (!nav) return;
+
+  const items = [
+    ['0.1', 'Why', '#why'],
+    ['0.2', 'What it solves', '#solves'],
+    ['0.3', 'Value', '#value'],
+    ['0.4', 'Examples', '#uses'],
+    ['0.5', 'Mental model', '#model'],
+    ['0.6', 'Tools & languages', '#stack'],
+    ['0.7', 'How to build', '#build'],
+    ['0.8', 'Invariants', '#invariants']
+  ];
+
+  nav.innerHTML = `
+    <div class="about-nav-label">Explore Section 0</div>
+    ${items.map(([n, label, href]) => `
+      <a class="about-jump-link" href="${href}">
+        <span class="about-jump-number">${n}</span>
+        <span class="about-jump-text">${label}</span>
+        <span class="about-jump-arrow" aria-hidden="true">↓</span>
+      </a>`).join('')}
+  `;
+
+  const style = document.createElement('style');
+  style.id = 'about-nav-mobile-fix';
+  style.textContent = `
+    .about-nav{
+      display:grid!important;
+      grid-template-columns:repeat(4,minmax(0,1fr))!important;
+      gap:8px!important;
+      margin:20px 0 6px!important;
+    }
+    .about-nav-label{
+      grid-column:1/-1;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1;
+      text-transform:uppercase;
+      letter-spacing:.09em;
+      font-weight:800;
+      margin:0 0 2px;
+    }
+    .about-nav .about-jump-link,
+    .about-nav .about-jump-link:visited{
+      display:grid!important;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+      min-height:50px;
+      padding:9px 10px!important;
+      border:1px solid var(--line)!important;
+      border-radius:13px!important;
+      background:var(--soft)!important;
+      color:var(--text)!important;
+      text-decoration:none!important;
+      font-size:13px!important;
+      font-weight:700!important;
+      line-height:1.15;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .about-nav .about-jump-link:active{
+      border-color:var(--accent)!important;
+      background:color-mix(in srgb,var(--accent) 11%,var(--soft))!important;
+      transform:translateY(1px);
+    }
+    .about-jump-number{
+      display:grid;
+      place-items:center;
+      min-width:34px;
+      height:28px;
+      padding:0 6px;
+      border-radius:8px;
+      background:color-mix(in srgb,var(--accent) 15%,var(--card));
+      color:var(--accent);
+      font-size:11px;
+      font-weight:850;
+      letter-spacing:.01em;
+    }
+    .about-jump-text{
+      min-width:0;
+      overflow-wrap:anywhere;
+    }
+    .about-jump-arrow{
+      color:var(--muted);
+      font-size:12px;
+    }
+    #why,#solves,#value,#uses,#model,#stack,#build,#invariants{
+      scroll-margin-top:84px!important;
+    }
+    @media(max-width:700px){
+      .about-nav{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+      .about-nav .about-jump-link{min-height:54px;padding:9px!important}
+    }
+    @media(max-width:370px){
+      .about-nav{grid-template-columns:1fr!important}
+      .about-nav .about-jump-link{min-height:48px}
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+enhanceAboutNavigator();
 
 for (const [family, section, description] of families) {
   const items = patterns.filter(p => p.f === family);
