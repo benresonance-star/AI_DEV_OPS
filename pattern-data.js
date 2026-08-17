@@ -32,6 +32,14 @@ export default [
     "d": "flowchart TD\n    I[\"Stable Entity ID<br/>Tree_281\"] --> P[\"Point proxy\"]\n    I --> C[\"Canopy envelope\"]\n    I --> M[\"Mesh\"]\n    I --> S[\"Splats\"]\n    I --> R[\"Procedural model\"]\n    P -. replaceable .-> M\n    M -. replaceable .-> R\n    S -. observation .-> I"
   },
   {
+    "n": "1.6",
+    "f": "World",
+    "t": "Multi-Representation Spatial State",
+    "p": "A physical world cannot be represented well by one universal mesh, voxel grid or geometric model. Different questions require different spatial forms, resolutions, certainty and authority.",
+    "r": "A spatial query resolves through stable world identity into the representations that intersect the requested region, then selects the cheapest valid representation whose authority and resolution are sufficient for the current question.",
+    "d": "flowchart TD\n    Q[\"Spatial query<br/>point · region · graphlet\"] --> I[\"Spatial index / tiles<br/>BVH · R-tree · octree\"]\n    I --> G[\"Relevant world entities / graphlets\"]\n    G --> R{\"Available representations\"}\n    R --> P[\"Coarse proxy / bounds\"]\n    R --> E[\"Exact geometry<br/>OpenCascade BRep\"]\n    R --> M[\"Derived mesh / LOD\"]\n    R --> F[\"Continuous fields<br/>solar · wind · heat · noise\"]\n    R --> O[\"Observed reality<br/>points · splats · sensors\"]\n    R --> S[\"Semantic facts + constraints\"]\n    P --> D{\"Sufficient for question?\"}\n    M --> D\n    F --> D\n    O --> D\n    S --> D\n    E --> D\n    D -->|yes| A[\"Answer with validity<br/>resolution · provenance · authority\"]\n    D -->|no| X[\"Refine / load / compute next representation\"]\n    X --> R\n    E -. \"authoritative for exact shape\" .-> A\n    O -. \"evidence, not exact truth\" .-> A"
+  },
+  {
     "n": "2.1",
     "f": "Change",
     "t": "Propose → Validate → Commit",
