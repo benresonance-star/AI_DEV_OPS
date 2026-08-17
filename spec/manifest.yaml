@@ -1,0 +1,68 @@
+schema_version: 1
+master_spec: PLASMA-MASTER-001
+rule: "Define once. Reference everywhere."
+
+documents:
+  - id: PLASMA-MASTER-001
+    path: spec/README.md
+    authority: canonical
+    purpose: master_navigation
+
+  - id: PLASMA-FOUNDATIONS-001
+    path: spec/00-foundations/README.md
+    authority: canonical
+    purpose: authority_and_foundation_registry
+
+  - id: PLASMA-PATTERNS-001
+    path: spec/01-patterns/README.md
+    authority: canonical
+    purpose: pattern_registry_and_traceability
+
+  - id: PLASMA-ARCH-001
+    path: spec/02-architecture/README.md
+    authority: canonical
+    purpose: architecture_specification
+
+  - id: PLASMA-ENG-001
+    path: spec/03-engineering/README.md
+    authority: canonical
+    purpose: engineering_operating_model
+
+  - id: PLASMA-ENG-CONSTITUTION-001
+    path: spec/03-engineering/orchestrator-constitution.md
+    authority: constitutional
+    purpose: orchestrator_and_rad_governance
+
+  - id: PLASMA-AGENTS-001
+    path: spec/03-engineering/agents/README.md
+    authority: canonical
+    purpose: agent_and_skill_registry
+
+  - id: PLASMA-CAPABILITIES-001
+    path: spec/04-capabilities/README.md
+    authority: canonical
+    purpose: capability_catalogue_and_frontier
+
+  - id: PLASMA-VERIFY-001
+    path: spec/05-verification/README.md
+    authority: canonical
+    purpose: verification_and_evidence_specification
+
+  - id: PLASMA-ADR-001
+    path: spec/06-decisions/README.md
+    authority: canonical
+    purpose: architectural_decision_registry
+
+projections:
+  - id: PLASMA-PATTERN-BOOK-WEB
+    path: index.html
+    authority: non_authoritative_projection
+    derives_from:
+      - PLASMA-PATTERNS-001
+      - PLASMA-FOUNDATIONS-001
+
+runtime_assets:
+  - index.html
+  - patternbook.css
+  - pattern-app.js
+  - pattern-data.js
