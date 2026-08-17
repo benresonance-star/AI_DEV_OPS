@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Plasma Pattern Book</title><style>:root{--bg:#f5f7f9;--card:#fff;--text:#15181c;--muted:#69717b;--line:#dce1e7;--accent:#1f6feb}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:900px;margin:auto;padding:env(safe-area-inset-top) 16px 70px}header{padding:24px 0 18px}h1{font-size:42px;line-height:.95;letter-spacing:-.045em;margin:8px 0 14px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);font-weight:800}.lead{font-size:18px;color:var(--muted);margin:0}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chip{font-size:12px;padding:7px 10px;border-radius:999px;background:#eaf1fb;color:#305b90}.toc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:10px 0 18px;position:sticky;top:8px;z-index:5}.toc details{margin:0}.toc summary{font-weight:700;cursor:pointer}.toc a{display:block;text-decoration:none;color:var(--text);padding:8px 2px;border-top:1px solid var(--line);font-size:14px}.toc nav{margin-top:8px}.family{margin:28px 0 10px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:800}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin:0 0 14px;box-shadow:0 6px 22px rgba(20,28,38,.04)}.n{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#eaf1fb;color:var(--accent);font-size:12px;font-weight:800;margin-right:8px}h2{display:inline;font-size:20px;letter-spacing:-.02em}.meta{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.07em;margin:6px 0 14px 42px}.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;margin:14px 0 4px}.rule{border-left:3px solid var(--accent);background:#f0f4f8;border-radius:0 10px 10px 0;padding:10px 12px}.flow{white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#f3f5f7;border:1px solid var(--line);border-radius:12px;padding:12px;overflow:auto}.note{font-size:14px;color:var(--muted)}footer{color:var(--muted);font-size:13px;padding-top:20px}@media(prefers-color-scheme:dark){:root{--bg:#0e1115;--card:#151a20;--text:#eef2f5;--muted:#9aa5b1;--line:#2b333d;--accent:#79a9ff}.chip{background:#182a46;color:#a7c5ff}.rule,.flow{background:#1c232b}.toc{background:#151a20}}@media(max-width:520px){h1{font-size:36px}.wrap{padding-left:12px;padding-right:12px}.card{padding:16px}.lead{font-size:16px}}</style></head><body><div class="wrap"><header><div class="eyebrow">Plasma · Living Pattern Language</div><h1>Plasma Pattern Book</h1><p class="lead">A small set of recurring rules for building and evolving Plasma as a reality-refinement engine.</p><div class="chips"><span class="chip">World-first</span><span class="chip">Progressive resolution</span><span class="chip">Typed operations</span><span class="chip">Verified change</span><span class="chip">Complexity must be earned</span></div></header><section class="toc"><details><summary>Pattern index</summary><nav><a href="#p1">01 Progressive World Resolution</a><a href="#p2">02 Authoritative State / Derived Views</a><a href="#p3">03 Propose → Validate → Commit</a><a href="#p4">04 Dependency-Driven Invalidation</a><a href="#p5">05 Typed Operation Contract</a><a href="#p6">06 Question-Driven Refinement</a><a href="#p7">07 Evidence → Claim → Belief</a><a href="#p8">08 Projection, Not Duplication</a><a href="#p9">09 Fork → Evaluate → Select</a><a href="#p10">10 Capability Frontier</a><a href="#p11">11 Cheap Test Before Expensive Test</a><a href="#p12">12 Local Failure Containment</a><a href="#p13">13 Stable Identity / Replaceable Representation</a><a href="#p14">14 Coarse Reject / Fine Confirm</a><a href="#p15">15 Human Attention as a Scarce Resource</a></nav></details></section><div class="family">Scale</div><article class="card" id="p1"><span class="n">01</span><h2>Progressive World Resolution</h2><div class="meta">Scale pattern</div><div class="label">Problem</div><div>Large worlds cannot become exact after every interaction without destroying responsiveness.</div><div class="label">Rule</div><div class="rule">Resolve only what is needed, where it is needed, and as accurately as the current action or question requires.</div><div class="label">Flow</div><div class="flow">ACTION
+↓
+cheap proxy response
+↓
+mark affected state dirty
+↓
+visible / relevant tiles first
+↓
+coarse → refined → exact
+↓
+background analysis</div><p class="note">Example: drag a building with its current mesh immediately, then rebuild OCC geometry and dependent analyses after release.</p></article><div class="family">World</div><article class="card" id="p2"><span class="n">02</span><h2>Authoritative State / Derived Views</h2><div class="meta">World pattern</div><div class="label">Problem</div><div>Representations drift when each behaves as an independent truth.</div><div class="label">Rule</div><div class="rule">Every piece of information has an owner; everything else is a projection, cached derivation or proposal.</div><div class="flow">WORLD ENTITY
+├─ semantic facts → world graph
+├─ exact shape → OCC BRep
+├─ display → derived mesh
+└─ analysis → derived claim</div></article><article class="card" id="p7"><span class="n">07</span><h2>Evidence → Claim → Belief</h2><div class="meta">World pattern</div><div class="label">Rule</div><div class="rule">Observation is evidence, not state. Evidence creates claims with provenance and confidence before affecting world belief.</div><div class="flow">evidence
+↓
+interpretation
+↓
+claim + provenance
+↓
+confidence / conflict
+↓
+accepted belief</div></article><article class="card" id="p8"><span class="n">08</span><h2>Projection, Not Duplication</h2><div class="meta">World pattern</div><div class="label">Rule</div><div class="rule">BIM, USD, Three.js, drawings and analysis models are projections of Plasma or typed proposals back into it—not silent parallel truths.</div><div class="flow">PLASMA WORLD
+├─→ Three.js
+├─→ USD
+├─→ analysis
+└─← typed import proposal</div></article><article class="card" id="p13"><span class="n">13</span><h2>Stable Identity / Replaceable Representation</h2><div class="meta">World pattern</div><div class="label">Rule</div><div class="rule">Entity identity persists independently of whichever representation is currently used.</div><div class="flow">Tree_281
+├─ point proxy
+├─ canopy envelope
+├─ mesh
+├─ splats
+└─ procedural model</div></article><div class="family">Change</div><article class="card" id="p3"><span class="n">03</span><h2>Propose → Validate → Commit</h2><div class="meta">Change pattern</div><div class="label">Rule</div><div class="rule">Nothing writes directly to canonical state. Every change first exists as a candidate patch.</div><div class="flow">human / agent / solver
+↓
+proposal
+↓
+candidate patch
+↓
+validation
+↙ reject   accept ↘
+          commit
+            ↓
+         revision</div></article><article class="card" id="p4"><span class="n">04</span><h2>Dependency-Driven Invalidation</h2><div class="meta">Change pattern</div><div class="label">Rule</div><div class="rule">Derived results declare what they read and write; only downstream dependencies become dirty.</div><div class="flow">fact changes
+↓
+dependency edges
+↓
+affected derived values
+↓
+DIRTY
+↓
+lazy recomputation</div></article><article class="card" id="p5"><span class="n">05</span><h2>Typed Operation Contract</h2><div class="meta">Change pattern</div><div class="label">Rule</div><div class="rule">Capabilities are stable contracts; implementations are replaceable.</div><div class="flow">typed inputs
+↓
+operation
+↓
+typed outputs
+↓
+validation
+↓
+world patch</div><p class="note">The implementation may be C++, TypeScript, Python, Z3, a GPU kernel, an LLM or an external solver.</p></article><article class="card" id="p12"><span class="n">12</span><h2>Local Failure Containment</h2><div class="meta">Change pattern</div><div class="label">Rule</div><div class="rule">An operator failure invalidates only itself and its dependents; unrelated world state remains usable.</div><div class="flow">operator fails
+↓
+result = FAILED
+↓
+dependents unavailable
+↓
+unrelated state remains valid</div></article><div class="family">Intelligence</div><article class="card" id="p6"><span class="n">06</span><h2>Question-Driven Refinement</h2><div class="meta">Intelligence pattern</div><div class="label">Rule</div><div class="rule">Refinement is driven by the decision or question being answered, not by a desire for total model completeness.</div><div class="flow">QUESTION
+↓
+required facts
+↓
+unresolved dependencies
+↓
+candidate operations
+↓
+refine relevant state</div></article><article class="card" id="p9"><span class="n">09</span><h2>Fork → Evaluate → Select</h2><div class="meta">Intelligence pattern</div><div class="label">Rule</div><div class="rule">Alternatives branch from a common world, are evaluated independently, and selected results advance a lineage.</div><div class="flow">WORLD A
+├─ A1 → evaluate
+├─ A2 → evaluate
+└─ A3 → evaluate
+        ↓
+ preserve / reject / select</div></article><article class="card" id="p10"><span class="n">10</span><h2>Capability Frontier</h2><div class="meta">Intelligence pattern</div><div class="label">Rule</div><div class="rule">Develop the smallest valuable capability immediately beyond the verified frontier.</div><div class="flow">verified capability
+↓
+identify next gap
+↓
+build smallest slice
+↓
+test / verify
+↓
+commit
+↓
+frontier advances</div></article><article class="card" id="p15"><span class="n">15</span><h2>Human Attention as a Scarce Resource</h2><div class="meta">Intelligence pattern</div><div class="label">Rule</div><div class="rule">Escalate only when human judgment changes the outcome; package the decision with evidence and consequences.</div><div class="flow">issue
+↓
+can system resolve?
+├─ yes → continue
+└─ no
+   ↓
+material human decision?
+├─ no → defer
+└─ yes → concise escalation</div></article><div class="family">Scale</div><article class="card" id="p11"><span class="n">11</span><h2>Cheap Test Before Expensive Test</h2><div class="meta">Scale pattern</div><div class="label">Rule</div><div class="rule">Order evaluation from cheapest, highest-elimination tests to expensive, high-fidelity tests.</div><div class="flow">scalar / bounding checks
+↓
+coarse geometry
+↓
+exact geometry
+↓
+specialist simulation</div></article><article class="card" id="p14"><span class="n">14</span><h2>Coarse Reject / Fine Confirm</h2><div class="meta">Scale pattern</div><div class="label">Rule</div><div class="rule">Use cheap approximations to eliminate weak candidates; spend fidelity only on survivors.</div><div class="flow">10,000 candidates
+↓ cheap
+1,800
+↓ medium
+300
+↓ detailed
+30
+↓ exact
+5</div></article><footer><strong>North-star invariants:</strong> World owns state. LLMs propose operations. Deterministic systems validate. Exact geometry is authoritative where exact geometry exists. Representations are replaceable. Computation is dependency-aware. Complexity must be earned by demonstrated need.</footer></div></body></html>
