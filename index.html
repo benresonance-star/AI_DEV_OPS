@@ -12,7 +12,176 @@
 <div class="topbar"><div class="topbrand">Plasma <small>Pattern Book</small></div><div class="topspacer"></div><button class="settings-btn" id="settingsBtn" type="button">⚙︎ <span>Settings</span></button></div>
 <div class="settings-panel" id="settingsPanel"><h3>Settings</h3><div class="setting-group"><div class="setting-label">Appearance</div><div class="seg"><button data-theme-choice="dark">Dark</button><button data-theme-choice="light">Light</button><button data-theme-choice="system">System</button></div></div><div class="setting-group"><div class="setting-label">Text size</div><div class="seg two"><button data-text-choice="standard">Standard</button><button data-text-choice="large">Large</button></div></div></div>
 <div class="wrap">
-<header><div class="eyebrow">Plasma · Living Pattern Language</div><h1>Plasma Pattern Book</h1><p class="lead">A small set of recurring rules for building and evolving Plasma as a reality-refinement engine.</p><div class="chips"><span class="chip">World-first</span><span class="chip">Progressive resolution</span><span class="chip">Typed operations</span><span class="chip">Verified change</span><span class="chip">Complexity must be earned</span></div></header>
+<header><div class="eyebrow">Plasma · Living Pattern Language</div><h1>Plasma Pattern Book</h1><p class="lead">A living guide to what Plasma is, why it exists, and the recurring rules for building and evolving it as a reality-refinement engine.</p><div class="chips"><span class="chip">World-first</span><span class="chip">Progressive resolution</span><span class="chip">Typed operations</span><span class="chip">Verified change</span><span class="chip">Complexity must be earned</span></div></header>
+
+<section class="about" id="about">
+  <div class="section-kicker">Section 0</div>
+  <h2>About Plasma</h2>
+  <p class="about-lead"><strong>Plasma is not a geometry engine with analysis added.</strong> It is a reality-refinement engine whose world can sometimes be viewed as geometry.</p>
+  <p class="about-copy">Its job is to maintain an evolving, computable model of a real or proposed world; understand what is known, what is derived, what is uncertain, what depends on what, and what is worth resolving next. Architecture is the first demanding application domain, but the underlying model is broader than buildings.</p>
+
+  <nav class="about-nav" aria-label="About Plasma sections">
+    <a href="#why">Why</a><a href="#solves">What it solves</a><a href="#value">Value</a><a href="#uses">Examples</a><a href="#model">Mental model</a><a href="#stack">Tools & languages</a><a href="#build">How to build</a><a href="#invariants">Invariants</a>
+  </nav>
+
+  <div class="about-diagram">
+    <div class="diagram-head"><div><div class="label">Plasma in one diagram</div><div class="diagram-caption">Intent drives selective refinement of a persistent world</div></div></div>
+    <div class="diagram-box">
+      <div class="diagram-render"><div class="diagram-loading">Rendering diagram…</div></div>
+      <script type="text/plain" class="diagram-source">flowchart TD
+        I[Intent / question / decision] --> W[Plasma World]
+        W --> U[Unresolved or decision-sensitive state]
+        U --> S[Select smallest valuable refinement]
+        S --> O[Typed operation]
+        O --> X{Execute with the right engine}
+        X --> G[Exact geometry / mesh]
+        X --> A[Analysis / simulation]
+        X --> C[Constraints / logic]
+        X --> R[Observation / inference]
+        G --> V[Validate + evaluate]
+        A --> V
+        C --> V
+        R --> V
+        V -->|accepted| E[Commit revision + invalidate dependents]
+        V -->|rejected| F[Keep world unchanged]
+        E --> W
+        W --> P[Progressive views: 3D / BIM / USD / reports]
+      </script>
+    </div>
+  </div>
+
+  <section class="about-block" id="why">
+    <div class="about-title"><span>0.1</span><h3>Why Plasma exists</h3></div>
+    <p>Architectural design is currently split across modelling, BIM, planning, environmental analysis, structure, services, cost, rendering and specialist simulation. Each tool often has its own representation, timing and assumptions. Analysis commonly arrives after important design decisions have already been made.</p>
+    <div class="problem-grid">
+      <div class="brief-card"><strong>Fragmented truth</strong><span>Geometry, BIM, analysis and survey data drift into parallel models.</span></div>
+      <div class="brief-card"><strong>Late feedback</strong><span>Specialist tools often check a design after the design has hardened.</span></div>
+      <div class="brief-card"><strong>Expensive recomputation</strong><span>Small changes can trigger large rebuilds because dependencies are poorly expressed.</span></div>
+      <div class="brief-card"><strong>Geometry-first thinking</strong><span>Meaning, constraints, uncertainty and provenance are treated as attachments to shapes.</span></div>
+      <div class="brief-card"><strong>AI without state discipline</strong><span>LLMs are useful proposers but unreliable as owners of canonical technical state.</span></div>
+      <div class="brief-card"><strong>Too few explored worlds</strong><span>Human teams cannot manually generate and assess enough credible alternatives early.</span></div>
+    </div>
+  </section>
+
+  <section class="about-block" id="solves">
+    <div class="about-title"><span>0.2</span><h3>What Plasma solves</h3></div>
+    <div class="statement-list">
+      <div><strong>One evolving world, many representations.</strong><span>A building, site or landscape has stable identity while BReps, meshes, fields, splats, BIM projections and reports remain replaceable views.</span></div>
+      <div><strong>Selective recomputation.</strong><span>Changes invalidate only what actually depends on them; lazy updates, tiling and progressive resolution keep interaction immediate.</span></div>
+      <div><strong>Safe machine action.</strong><span>Humans, agents, generators and solvers propose typed operations; deterministic validation decides whether canonical state changes.</span></div>
+      <div><strong>Earlier specialist intelligence.</strong><span>Wind, daylight, energy, structure, cost and compliance can become callable evaluations during design rather than end-stage checks.</span></div>
+      <div><strong>Exploration without losing lineage.</strong><span>Alternative worlds can fork, evaluate and preserve diverse high-performing solutions instead of repeatedly overwriting one model.</span></div>
+      <div><strong>Measured and designed reality in one framework.</strong><span>Survey, sensors, scans, point observations and inferred conditions can coexist with proposed geometry and explicit confidence.</span></div>
+    </div>
+  </section>
+
+  <section class="about-block" id="value">
+    <div class="about-title"><span>0.3</span><h3>What value it creates</h3></div>
+    <div class="value-grid">
+      <div class="value-card"><b>Faster decisions</b><span>Immediate proxies first; exact and expensive truth follows only where required.</span></div>
+      <div class="value-card"><b>More credible options</b><span>Explore far more design worlds while preserving compliance, performance and provenance.</span></div>
+      <div class="value-card"><b>Less rework</b><span>Expose constraints and specialist consequences while designs are still fluid.</span></div>
+      <div class="value-card"><b>Better AI leverage</b><span>Agents operate through bounded contracts and verifiable state instead of free-form model mutation.</span></div>
+      <div class="value-card"><b>Tool independence</b><span>OpenCascade, Z3, simulators, USD and future engines can be replaced behind stable operation contracts.</span></div>
+      <div class="value-card"><b>Compounding capability</b><span>Each verified operator becomes reusable infrastructure for later workflows and autonomous refinement.</span></div>
+    </div>
+  </section>
+
+  <section class="about-block" id="uses">
+    <div class="about-title"><span>0.4</span><h3>Examples of use</h3></div>
+    <div class="use-grid">
+      <div class="use-card"><strong>Development feasibility</strong><span>Import a site and planning controls; generate and compare compliant envelopes, yield, apartment layouts, parking, cost and solar outcomes.</span></div>
+      <div class="use-card"><strong>Live architectural design</strong><span>Change massing, floor plates, cores or façade and progressively update geometry, areas, daylight, structure, energy and cost.</span></div>
+      <div class="use-card"><strong>Landscape + ecology</strong><span>Model terrain, hydrology, vegetation, soil, groundwater and environmental fields at different spatial resolutions.</span></div>
+      <div class="use-card"><strong>Existing-world reconstruction</strong><span>Combine surveys, scans, splats, point observations and semantic inference without pretending every observation is exact truth.</span></div>
+      <div class="use-card"><strong>Design ecology</strong><span>Fork thousands of candidate worlds, cheaply reject weak ones, deeply evaluate survivors, and preserve diverse high-performing families.</span></div>
+      <div class="use-card"><strong>Specialist co-design</strong><span>Project the relevant part of the world to structural, wind, thermal, acoustic or fabrication tools and bring results back as typed claims.</span></div>
+    </div>
+  </section>
+
+  <section class="about-block" id="model">
+    <div class="about-title"><span>0.5</span><h3>The smallest useful mental model</h3></div>
+    <div class="formula-grid">
+      <div><small>WORLD</small><strong>Entities + Facts + Representations</strong><span>What exists, what is known about it, and how it can currently be expressed.</span></div>
+      <div><small>CHANGE</small><strong>Operations</strong><span>Typed procedures that read state and propose a candidate patch.</span></div>
+      <div><small>HISTORY</small><strong>Revisions</strong><span>Accepted changes remain traceable and reproducible.</span></div>
+      <div><small>COMPUTATION</small><strong>Dependency DAG</strong><span>Derived values declare what they read and write so stale state can be localized.</span></div>
+      <div><small>TRUTH GATE</small><strong>Validation + constraints</strong><span>Candidate results must prove validity before canonical state changes.</span></div>
+      <div><small>INTERACTION</small><strong>Progressive world resolution</strong><span>Cheap proxy now; refined and exact representations catch up progressively.</span></div>
+    </div>
+    <div class="callout"><strong>Kernel bias:</strong> prefer the fewest stable primitives possible. Current working primitives are <b>Entity, Fact, Representation, Operation</b>. Relations can be typed facts; events can be committed operations; constraints can be evaluating operations.</div>
+  </section>
+
+  <section class="about-block" id="stack">
+    <div class="about-title"><span>0.6</span><h3>Tools, representations and languages</h3></div>
+    <p class="muted-intro">These are roles, not dependencies. Plasma should survive replacing individual engines as long as contracts and invariants remain stable.</p>
+    <div class="stack-table" role="table" aria-label="Plasma tools and language roles">
+      <div class="stack-row stack-head" role="row"><div>Domain</div><div>Preferred tool / language</div><div>Role</div></div>
+      <div class="stack-row" role="row"><div>World + app</div><div><strong>TypeScript</strong></div><div>Entities, facts, operations, dependencies, revisions, UI, orchestration.</div></div>
+      <div class="stack-row" role="row"><div>Exact geometry</div><div><strong>C++ + OpenCascade</strong></div><div>Authoritative BRep/NURBS geometry, booleans, topology, mass properties and exact checks.</div></div>
+      <div class="stack-row" role="row"><div>Interactive representation</div><div><strong>Mesh + Three.js / GPU</strong></div><div>Fast viewing, selection, provisional manipulation and many approximate analyses.</div></div>
+      <div class="stack-row" role="row"><div>Research + analysis</div><div><strong>Python</strong></div><div>Disposable prototypes, numerical work, ML, optimisation and specialist adapters before performance justifies migration.</div></div>
+      <div class="stack-row" role="row"><div>Continuous phenomena</div><div><strong>Sparse fields / tiles</strong></div><div>Solar, wind, temperature, noise, moisture, groundwater, ecology and other continuous spatial state.</div></div>
+      <div class="stack-row" role="row"><div>Measured reality</div><div><strong>Points / splats / observations</strong></div><div>Uncertain evidence from surveys, lidar, cameras, sensors and scans.</div></div>
+      <div class="stack-row" role="row"><div>Hard logic</div><div><strong>Z3 / SMT where earned</strong></div><div>Satisfiable / unsatisfiable / unknown logical constraint systems when procedural checks become insufficient.</div></div>
+      <div class="stack-row" role="row"><div>Specialist simulation</div><div><strong>FMI-like adapters</strong></div><div>Project only relevant state to external solvers; return results with provenance rather than embedding every solver.</div></div>
+      <div class="stack-row" role="row"><div>Scene interchange</div><div><strong>USD</strong></div><div>External composition and interchange; not necessarily Plasma's canonical database.</div></div>
+      <div class="stack-row" role="row"><div>Design exploration</div><div><strong>Forking + MAP-Elites later</strong></div><div>Preserve diverse high-performing world families rather than seek one brittle optimum.</div></div>
+      <div class="stack-row" role="row"><div>AI reasoning</div><div><strong>LLMs / coding agents</strong></div><div>Interpret, propose operations, scaffold operators and select refinement work; never own canonical truth.</div></div>
+    </div>
+    <div class="callout"><strong>Polyglot rule:</strong> TypeScript thinks about the world; C++ computes exact geometry; Python experiments with how the world can be analysed. Cross-language boundaries should be coarse, typed and replaceable.</div>
+  </section>
+
+  <section class="about-block" id="build">
+    <div class="about-title"><span>0.7</span><h3>How Plasma should be built</h3></div>
+    <p>Build by <strong>verified capability frontier</strong>, not by completing a giant platform architecture. The north-star architecture constrains evolution; real workflows decide what gets implemented next.</p>
+    <div class="build-loop">
+      <div><b>1</b><strong>Pick a real question</strong><span>What architectural task cannot Plasma do yet?</span></div>
+      <div><b>2</b><strong>Delete and simplify</strong><span>Make the requirement earn every new abstraction and technology.</span></div>
+      <div><b>3</b><strong>Build one vertical slice</strong><span>Prefer a visible end-to-end capability over a horizontal subsystem.</span></div>
+      <div><b>4</b><strong>Verify deterministically</strong><span>Compiler, geometry validity, known test worlds, numerical checks, constraints and regression tests outrank LLM judgment.</span></div>
+      <div><b>5</b><strong>Commit only proven gains</strong><span>Preserve capability in Git and the capability ledger; reject or revert failed experiments.</span></div>
+      <div><b>6</b><strong>Repeat at the frontier</strong><span>Add fields, Z3, schedulers, MAP-Elites or distributed execution only when a measured bottleneck demands them.</span></div>
+    </div>
+    <div class="callout"><strong>Agentic RAD loop:</strong> Selector → Builder → deterministic tests → Verifier → accept / retry / stop. The development loop that improves Plasma should mirror the Plasma world loop: <b>propose → execute → evaluate → commit</b>.</div>
+  </section>
+
+  <section class="about-block" id="invariants">
+    <div class="about-title"><span>0.8</span><h3>North-star invariants for humans and AI</h3></div>
+    <div class="invariant-grid">
+      <div><strong>World owns state.</strong><span>No UI, agent, geometry kernel or external solver silently becomes a second canonical model.</span></div>
+      <div><strong>LLMs propose; they do not declare truth.</strong><span>Machine-generated changes pass through typed operations and validation.</span></div>
+      <div><strong>Authority is domain-specific.</strong><span>OCC may own exact geometry while the world graph owns semantic identity and a simulator owns a derived claim.</span></div>
+      <div><strong>Representations are replaceable.</strong><span>Stable entity identity must survive changes of mesh, BRep, field, splat or external format.</span></div>
+      <div><strong>Dependencies are explicit.</strong><span>Never use global recomputation when the real dependency chain can be expressed.</span></div>
+      <div><strong>Approximation is labelled.</strong><span>Provisional, stale, approximate and verified state must never be confused in the UI or API.</span></div>
+      <div><strong>Failures are local.</strong><span>A failed analysis should invalidate its dependents, not destroy unrelated world state.</span></div>
+      <div><strong>Complexity must be earned.</strong><span>Do not build speculative infrastructure because it sounds appropriate for a world engine.</span></div>
+    </div>
+
+    <div class="ai-brief">
+      <div class="label">Before an AI changes Plasma, it should answer</div>
+      <ol>
+        <li>What concrete user capability will this change prove?</li>
+        <li>What is the smallest implementation that can prove it?</li>
+        <li>Can existing primitives or operators do the job without new infrastructure?</li>
+        <li>What does the operation read, write and invalidate?</li>
+        <li>What deterministic test proves success and protects prior capability?</li>
+        <li>Does this alter a north-star invariant, canonical schema, security boundary or geometry authority? If yes, stop for human review.</li>
+      </ol>
+    </div>
+
+    <div class="not-grid">
+      <div><span>Plasma is not</span><strong>a CAD package with more plugins</strong></div>
+      <div><span>Plasma is not</span><strong>a giant monolithic simulator</strong></div>
+      <div><span>Plasma is not</span><strong>a USD stage pretending to be the world</strong></div>
+      <div><span>Plasma is not</span><strong>an LLM-owned state machine</strong></div>
+      <div><span>Plasma is not</span><strong>a requirement to model everything exactly</strong></div>
+      <div><span>Plasma is</span><strong>a disciplined system for progressively making the right parts of a world more resolved and more useful</strong></div>
+    </div>
+  </section>
+</section>
+
 <section class="toc"><details><summary>Pattern index</summary><nav id="toc"></nav></details></section>
 <main id="content"></main>
 <footer><strong>North-star invariants:</strong> World owns state. LLMs propose operations. Deterministic systems validate. Exact geometry is authoritative where exact geometry exists. Representations are replaceable. Computation is dependency-aware. Complexity must be earned by demonstrated need.</footer>
