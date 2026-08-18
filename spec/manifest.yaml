@@ -88,3 +88,4 @@ runtime_assets:
     - pattern-data.js
   specification:
     - spec/spec.css
+    - spec/spec-nav.js
