@@ -1,68 +1,90 @@
-schema_version: 1
+schema_version: 2
 master_spec: PLASMA-MASTER-001
 rule: "Define once. Reference everywhere."
+canonical_format: html
 
 documents:
   - id: PLASMA-MASTER-001
-    path: spec/README.md
+    path: spec/index.html
     authority: canonical
     purpose: master_navigation
 
   - id: PLASMA-FOUNDATIONS-001
-    path: spec/00-foundations/README.md
+    path: spec/00-foundations/index.html
     authority: canonical
     purpose: authority_and_foundation_registry
 
   - id: PLASMA-PATTERNS-001
-    path: spec/01-patterns/README.md
-    authority: canonical
+    path: spec/01-patterns/index.html
+    authority: canonical_registry
     purpose: pattern_registry_and_traceability
+    notes: individual_pattern_records_currently_render_from_root_pattern_book_source
 
   - id: PLASMA-ARCH-001
-    path: spec/02-architecture/README.md
+    path: spec/02-architecture/index.html
     authority: canonical
     purpose: architecture_specification
 
   - id: PLASMA-ENG-001
-    path: spec/03-engineering/README.md
+    path: spec/03-engineering/index.html
     authority: canonical
     purpose: engineering_operating_model
 
   - id: PLASMA-ENG-CONSTITUTION-001
-    path: spec/03-engineering/orchestrator-constitution.md
+    path: spec/03-engineering/orchestrator.html
     authority: constitutional
-    purpose: orchestrator_and_rad_governance
+    purpose: orchestrator_and_development_governance
+
+  - id: PLASMA-ENG-RAD-001
+    path: spec/03-engineering/rad.html
+    authority: canonical
+    purpose: rad_loop_and_provider_neutral_implementation_shim
 
   - id: PLASMA-AGENTS-001
-    path: spec/03-engineering/agents/README.md
+    path: spec/03-engineering/agents/index.html
     authority: canonical
     purpose: agent_and_skill_registry
 
   - id: PLASMA-CAPABILITIES-001
-    path: spec/04-capabilities/README.md
+    path: spec/04-capabilities/index.html
     authority: canonical
     purpose: capability_catalogue_and_frontier
 
   - id: PLASMA-VERIFY-001
-    path: spec/05-verification/README.md
+    path: spec/05-verification/index.html
     authority: canonical
     purpose: verification_and_evidence_specification
 
   - id: PLASMA-ADR-001
-    path: spec/06-decisions/README.md
+    path: spec/06-decisions/index.html
     authority: canonical
     purpose: architectural_decision_registry
+
+legacy_pointers:
+  - spec/README.md
+  - spec/00-foundations/README.md
+  - spec/01-patterns/README.md
+  - spec/02-architecture/README.md
+  - spec/03-engineering/README.md
+  - spec/03-engineering/orchestrator-constitution.md
+  - spec/03-engineering/agents/README.md
+  - spec/04-capabilities/README.md
+  - spec/05-verification/README.md
+  - spec/06-decisions/README.md
 
 projections:
   - id: PLASMA-PATTERN-BOOK-WEB
     path: index.html
-    authority: non_authoritative_projection
+    authority: presentation_projection
     derives_from:
       - PLASMA-PATTERNS-001
       - PLASMA-FOUNDATIONS-001
 
 runtime_assets:
-  - index.html
-  - patternbook.css
-  - pattern-app.js
-  - pattern-data.js
+  root_pattern_book:
+    - index.html
+    - patternbook.css
+    - pattern-app.js
+    - pattern-data.js
+  specification:
+    - spec/spec.css
