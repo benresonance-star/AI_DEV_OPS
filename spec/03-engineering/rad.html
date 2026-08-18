@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Plasma · RAD + Implementation Shim</title><link rel="stylesheet" href="../spec.css"></head><body><div class="topbar"><div class="brand">Plasma <small>RAD + Implementation Shim</small></div><div class="toplinks"><a class="keep" href="./">Engineering</a><a href="./orchestrator.html">Constitution</a><a href="./agents/">Agents</a></div></div><main class="wrap"><div class="breadcrumbs"><a href="../">Specification</a><span>›</span><a href="./">Engineering</a><span>›</span><span>RAD</span></div><header class="hero"><div class="eyebrow">PLASMA-ENG-RAD-001 · Canonical engineering contract</div><h1>RAD + Implementation Shim</h1><p class="lead">The executable development loop between Plasma’s orchestration brain and replaceable implementation workers such as Cursor, Grok, Codex, local agents or future systems.</p><div class="statusline"><span class="status canonical">Canonical</span><span class="status">Provider-neutral</span><span class="status">Capability-first</span></div></header><section class="section"><div class="kicker">Operating idea</div><h2>The shim separates intent from implementation</h2><div class="flow"><div class="step"><b>Verified frontier</b></div><div class="arrow">→</div><div class="step"><b>Selector</b><br><span class="muted">Smallest valuable gap</span></div><div class="arrow">→</div><div class="step"><b>Capability Contract</b></div><div class="arrow">+</div><div class="step"><b>Context Manifest</b></div><div class="arrow">→</div><div class="step"><b>Implementation Provider</b></div><div class="arrow">→</div><div class="step"><b>Evidence Bundle</b></div><div class="arrow">→</div><div class="step"><b>Verifier</b></div><div class="arrow">→</div><div class="step"><b>Ledger update</b></div></div><div class="rule">The orchestrator describes what must become true and what evidence proves it. The implementation provider chooses local coding tactics inside the permitted scope.</div></section><section class="section"><div class="kicker">Shim payload A</div><h2>Capability Contract</h2><p>The contract is the smallest complete statement of the build objective. It is frozen for the run unless an explicit change is recorded.</p><pre class="code">capability_id: CAP-PXXX
+name: Observable behaviour
+state: READY
+value: Why this matters
+pattern_refs: []
+architecture_refs: []
+inputs: []
+outputs: []
+preconditions: []
+dependencies: []
+invariants: []
+acceptance_tests: []
+test_worlds: []
+allowed_scope: []
+forbidden_scope: []
+performance_constraints: []
+max_repair_attempts: 2
+escalate_if: []</pre></section><section class="section"><div class="kicker">Shim payload B</div><h2>Context Manifest</h2><p>The builder receives only the authoritative material required for the capability, referenced by stable ID rather than copied project history.</p><pre class="code">capability_id: CAP-PXXX
+constitution: PLASMA-ENG-CONSTITUTION-001
+foundation_refs: []
+pattern_refs: []
+architecture_refs: []
+adr_refs: []
+related_capability_refs: []
+public_schema_refs: []
+test_fixture_refs: []
+required_commands: []
+provider_notes: []  # non-authoritative</pre><div class="callout"><b>Context discipline:</b> if a definition is missing, request the canonical source by ID. Do not invent it from memory or infer a second definition.</div></section><section class="section"><div class="kicker">Shim payload C</div><h2>Evidence Bundle</h2><p>The implementation layer returns evidence rather than a narrative claim that the task is complete.</p><pre class="code">capability_id: CAP-PXXX
+candidate_ref: branch|worktree|commit
+provider: replaceable-provider-id
+files_changed: []
+commands_run: []
+compile_result: pass|fail|not_applicable
+tests: []
+geometry_validation: []
+constraint_validation: []
+performance_evidence: []
+visual_evidence: []
+acceptance_criteria:
+  - criterion: ...
+    result: pass|fail
+known_limitations: []
+architecture_changes: []
+unresolved_failures: []
+verifier_result: pending</pre></section><section class="section"><div class="kicker">Provider boundary</div><h2>Cursor and Grok are workers, not architecture</h2><div class="grid"><article class="card"><h3>Orchestration side</h3><ul><li>Owns product goal and capability frontier.</li><li>Writes capability contract.</li><li>Assembles canonical context.</li><li>Sets scope, repair limit and escalation rules.</li><li>Chooses provider based on capability needs.</li></ul></article><article class="card"><h3>Implementation side</h3><ul><li>Reads the bounded contract and context.</li><li>Builds inside an isolated worktree/branch.</li><li>May use subagents and local tools.</li><li>Cannot redefine architecture or acceptance.</li><li>Returns code plus evidence bundle.</li></ul></article></div><div class="callout"><b>Swap test:</b> replacing Cursor/Grok with another capable provider should not require changing the capability contract, canonical agent role or verification semantics.</div></section><section class="section"><div class="kicker">RAD cycle</div><h2>One capability at a time</h2><div class="grid"><article class="card third"><span class="num">1</span><h3>Select</h3><p>Choose the smallest valuable reachable gap beyond VERIFIED state.</p></article><article class="card third"><span class="num">2</span><h3>Delete / simplify</h3><p>Challenge the requirement before adding architecture or infrastructure.</p></article><article class="card third"><span class="num">3</span><h3>Contract</h3><p>Freeze observable behaviour, scope, invariants and acceptance evidence.</p></article><article class="card third"><span class="num">4</span><h3>Build</h3><p>Implement one end-to-end vertical slice in isolation.</p></article><article class="card third"><span class="num">5</span><h3>Verify</h3><p>Independent deterministic evidence outranks model confidence.</p></article><article class="card third"><span class="num">6</span><h3>Commit or learn</h3><p>Update the ledger only with verified capability or reliable blocking evidence.</p></article></div></section><section class="section"><div class="kicker">Repair policy</div><h2>Bounded retries</h2><div class="flow"><div class="step"><b>Initial build</b></div><div class="arrow">→</div><div class="step"><b>Verify</b></div><div class="arrow">→</div><div class="step"><b>Repair 1</b></div><div class="arrow">→</div><div class="step"><b>Verify</b></div><div class="arrow">→</div><div class="step"><b>Repair 2</b></div><div class="arrow">→</div><div class="step"><b>Stop</b><br><span class="muted">Reduce · revert · block · escalate</span></div></div><div class="rule">No indefinite self-repair loop. Failure is valid information and may advance the frontier by revealing a missing prerequisite or architectural decision.</div></section><section class="section"><div class="kicker">Architecture gate</div><h2>Classify before build</h2><div class="tablewrap"><table class="table"><thead><tr><th>Local + reversible</th><th>Architectural / human gate</th></tr></thead><tbody><tr><td>Private helper, local refactor, algorithm swap behind contract</td><td>World primitives, canonical storage, exact geometry authority</td></tr><tr><td>New test fixture, implementation optimization</td><td>Public operation schema, graphlet semantics, revision model</td></tr><tr><td>Provider or model change behind the shim</td><td>New language boundary, security boundary, major dependency</td></tr><tr><td>Visual/UI implementation that preserves contract</td><td>Distributed execution or irreversible migration strategy</td></tr></tbody></table></div></section><section class="section"><div class="kicker">Capability quality</div><h2>Build behaviour, not infrastructure</h2><div class="grid"><article class="card"><h3>Good</h3><p>“Moving a building gives immediate provisional feedback, then exact geometry verification and an updated setback result.”</p></article><article class="card"><h3>Weak</h3><p>“Build the geometry pipeline.”</p></article></div><p class="muted">The first can be observed and verified. The second invites unbounded architecture work without a clear truth condition.</p></section><div class="navnext"><a href="./orchestrator.html">← Constitution</a><a href="./agents/">Agent Registry →</a></div><footer class="footer">PLASMA-ENG-RAD-001 · Capability Contract + Context Manifest → Provider → Evidence Bundle</footer></main></body></html>
