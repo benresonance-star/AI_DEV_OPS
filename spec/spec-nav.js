@@ -34,6 +34,7 @@
     const active = normalize(href) === current;
     return `<a href="${href}"${active ? ' class="active" aria-current="page"' : ''}>${label}</a>`;
   };
+  const patternActive = normalize(projectBase.href) === current;
 
   const nav = document.createElement('nav');
   nav.className = 'spec-global-nav';
@@ -42,7 +43,7 @@
     <div class="spec-global-nav-inner">
       <div class="spec-nav-row">
         <span class="spec-nav-label">Master book</span>
-        <a class="projection-link" href="${projectBase.href}">Pattern Book</a>
+        <a class="projection-link${patternActive ? ' active' : ''}" href="${projectBase.href}"${patternActive ? ' aria-current="page"' : ''}>Pattern Book</a>
         ${primary.map(makeLink).join('')}
       </div>
       <div class="spec-nav-row spec-nav-engineering">
